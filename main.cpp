@@ -120,10 +120,10 @@ int main(){
         // Coffee Booth logics
         cout << "Coffee Booth: ";
         if (head) {
-            std::cout << "Serving " << head->customerName << " (" << head->drinkOrder << ")\n";
+            cout << "Serving " << head->customerName << " (" << head->drinkOrder << ")\n";
             dequeueCoffee(head);
         } else {
-            std::cout << "No customers to serve\n";
+            cout << "No customers to serve\n";
         }
 
         if (rand() %2 == 0) queueCoffee(head, getRandomName(),getRandomOrder("coffee"));
@@ -132,30 +132,30 @@ int main(){
         // Muffin Booth logic
         cout << "Muffin Booth: ";
         if (!muffinQueue.empty()) {
-            std::cout << "Serving " << muffinQueue.front().customerName << " (" << muffinQueue.front().order << ")\n";
+            cout << "Serving " << muffinQueue.front().customerName << " (" << muffinQueue.front().order << ")\n";
             muffinQueue.pop_front();
         } else {
-            std::cout << "No customers to serve\n";
+            cout << "No customers to serve\n";
         }
         if (rand() % 2 == 0) muffinQueue.push_back({getRandomName(), getRandomOrder("muffin")});
 
          // Bracelet Booth logic
         cout << "Bracelet Booth: ";
         if (!braceletQueue.empty()) {
-            std::cout << "Serving " << braceletQueue.front().customerName << " (" << braceletQueue.front().order << ")\n";
+            cout << "Serving " << braceletQueue.front().customerName << " (" << braceletQueue.front().order << ")\n";
             braceletQueue.erase(braceletQueue.begin());
         } else {
-            std::cout << "No customers to serve\n";
+            cout << "No customers to serve\n";
         }
         if (rand() % 2 == 0) braceletQueue.push_back({getRandomName(), getRandomOrder("bracelet")});
 
         // Gadget Booth logic
         cout << "Gadget Booth: ";
         if (!gadgetQueue.empty()) {
-            std::cout << "Serving " << gadgetQueue.front().customerName << " (" << gadgetQueue.front().order << ")\n";
+            cout << "Serving " << gadgetQueue.front().customerName << " (" << gadgetQueue.front().order << ")\n";
             gadgetQueue.pop_front();
         } else {
-            std::cout << "No customers to serve\n";
+            cout << "No customers to serve\n";
         }
         if (rand() % 2 == 0) gadgetQueue.push_back({getRandomName(), getRandomOrder("gadget")});
     }
