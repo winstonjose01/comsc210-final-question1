@@ -8,12 +8,17 @@
 # include <ctime>
 using namespace std;
  
-
+// functin prototypes
+string getRandomName();
+string getRandomOrder(const string& type);
+void queueCoffee(CoffeeNode*& head, const string& name, const string& order);
+void dequeueCoffee(CoffeeNode*& head);
+void displayCoffeeQueue(CoffeeNode* head);
 
 struct CoffeeNode {
     string customerName;
     string drinkOrder;
-    CoffeeNode* next;
+    CoffeeNode* next; // Pointer to the next node in the linked list
 };
 
 struct Customer {
@@ -52,6 +57,7 @@ string getRandomOrder(const string &type){
 
 }
 
+// Add a customer to the end of the coffee queue
 void queueCoffee (CoffeeNode* &head, const string& name, const string&order){
     CoffeeNode* newNode = new CoffeeNode{name, order, nullptr};
     if (!head) {
@@ -63,6 +69,7 @@ void queueCoffee (CoffeeNode* &head, const string& name, const string&order){
     }
 }
 
+// Remove the customer at the front of the coffee queue
 void dequeueCoffee(CoffeeNode*& head) {
     if (head) {
         CoffeeNode* temp = head;
@@ -71,6 +78,7 @@ void dequeueCoffee(CoffeeNode*& head) {
     }
 }
 
+// Display all customers in the coffee queue
 void displayCoffeeQueue(CoffeeNode* head) {
     while (head) {
         cout << head->customerName << " (" << head->drinkOrder << ") ";
@@ -88,16 +96,19 @@ int main(){
         queueCoffee(head, getRandomName(), getRandomOrder("coffee"));
      }
 
+    // Muffin Booth: Deque 
     deque<Customer> muffinQueue;
     for (int i = 0; i < 3; ++i) {
         muffinQueue.push_back({getRandomName(), getRandomOrder("muffin")});
     }
 
+    // Bracelet Booth: Vector queue
     vector<Customer> braceletQueue;
     for (int i = 0; i < 3; ++i) {
         braceletQueue.push_back({getRandomName(), getRandomOrder("bracelet")});
     }
 
+    // Gadget Booth: Deque queue
     deque<Customer> gadgetQueue;
     for (int i = 0; i < 3; ++i) {
         gadgetQueue.push_back({getRandomName(), getRandomOrder("gadget")});
@@ -106,7 +117,7 @@ int main(){
     for (int round = 1; round <= 10; ++round){
         cout << "\n=== Round " << round << " ===\n";
 
-        // Coffee Booth
+        // Coffee Booth logics
         cout << "Coffee Booth: ";
         if (head) {
             std::cout << "Serving " << head->customerName << " (" << head->drinkOrder << ")\n";
@@ -118,7 +129,7 @@ int main(){
         if (rand() %2 == 0) queueCoffee(head, getRandomName(),getRandomOrder("coffee"));
         
 
-        // Muffin Booth
+        // Muffin Booth logic
         cout << "Muffin Booth: ";
         if (!muffinQueue.empty()) {
             std::cout << "Serving " << muffinQueue.front().customerName << " (" << muffinQueue.front().order << ")\n";
@@ -128,6 +139,7 @@ int main(){
         }
         if (rand() % 2 == 0) muffinQueue.push_back({getRandomName(), getRandomOrder("muffin")});
 
+         // Bracelet Booth logic
         cout << "Bracelet Booth: ";
         if (!braceletQueue.empty()) {
             std::cout << "Serving " << braceletQueue.front().customerName << " (" << braceletQueue.front().order << ")\n";
@@ -137,6 +149,7 @@ int main(){
         }
         if (rand() % 2 == 0) braceletQueue.push_back({getRandomName(), getRandomOrder("bracelet")});
 
+        // Gadget Booth logic
         cout << "Gadget Booth: ";
         if (!gadgetQueue.empty()) {
             std::cout << "Serving " << gadgetQueue.front().customerName << " (" << gadgetQueue.front().order << ")\n";
