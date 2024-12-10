@@ -1,3 +1,5 @@
+// COMS210 | Final Exam Question 1 | Winston Jose
+
 # include <iostream>
 # include <string>
 # include <deque>
@@ -5,6 +7,7 @@
 # include <queue>
 # include <ctime>
 using namespace std;
+ 
 
 
 struct CoffeeNode {
@@ -24,7 +27,7 @@ string getRandomName() {
     return names[rand_num];
 }
 
-string getRandomOrder(string &type){
+string getRandomOrder(const string &type){
     int rand_num;
     if (type == "coffee"){
         string drinks[] = {"Latte","Cappucino","Expresso","Mocha","Americano"};
@@ -104,7 +107,7 @@ int main(){
         cout << "\n=== Round " << round << " ===\n";
 
         // Coffee Booth
-    cout << "Coffee Booth: ";
+        cout << "Coffee Booth: ";
         if (head) {
             std::cout << "Serving " << head->customerName << " (" << head->drinkOrder << ")\n";
             dequeueCoffee(head);
@@ -112,9 +115,39 @@ int main(){
             std::cout << "No customers to serve\n";
         }
 
-        if (rand() %2 == 0) queueCoffee(head, getRandomName(),getRandomOrder("coffee"))
+        if (rand() %2 == 0) queueCoffee(head, getRandomName(),getRandomOrder("coffee"));
+        
 
+        // Muffin Booth
+        cout << "Muffin Booth: ";
+        if (!muffinQueue.empty()) {
+            std::cout << "Serving " << muffinQueue.front().customerName << " (" << muffinQueue.front().order << ")\n";
+            muffinQueue.pop_front();
+        } else {
+            std::cout << "No customers to serve\n";
+        }
+        if (rand() % 2 == 0) muffinQueue.push_back({getRandomName(), getRandomOrder("muffin")});
+
+        cout << "Bracelet Booth: ";
+        if (!braceletQueue.empty()) {
+            std::cout << "Serving " << braceletQueue.front().customerName << " (" << braceletQueue.front().order << ")\n";
+            braceletQueue.erase(braceletQueue.begin());
+        } else {
+            std::cout << "No customers to serve\n";
+        }
+        if (rand() % 2 == 0) braceletQueue.push_back({getRandomName(), getRandomOrder("bracelet")});
+
+        cout << "Gadget Booth: ";
+        if (!gadgetQueue.empty()) {
+            std::cout << "Serving " << gadgetQueue.front().customerName << " (" << gadgetQueue.front().order << ")\n";
+            gadgetQueue.pop_front();
+        } else {
+            std::cout << "No customers to serve\n";
+        }
+        if (rand() % 2 == 0) gadgetQueue.push_back({getRandomName(), getRandomOrder("gadget")});
     }
+
+    while (head) dequeueCoffee(head);
 
     return 0;
 }
